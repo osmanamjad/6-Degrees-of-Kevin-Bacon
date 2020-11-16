@@ -1,2 +1,2 @@
-Muhammad Osman Amjad: amjadmu6  
-Jimmy Yu:  yujimmy1
+yujimmy1, Jimmy, Yu  
+amjadmu6, Muhammad Osman, Amjad  

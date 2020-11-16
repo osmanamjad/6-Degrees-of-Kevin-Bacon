@@ -1,28 +1,34 @@
+/*
+ * Assignment 1
+ * 
+ * Jimmy Yu, 1005499060
+ * Osman Amjad, 1005308016
+ * 
+ */
+
 package ca.utoronto.utm.mcs;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.net.InetSocketAddress;
 import com.sun.net.httpserver.HttpServer;
 
-import javax.inject.Inject;
-
-
-public class App
+public class App 
 {
-    static int port = 8080;
-
+    static int PORT = 8080;
     public static void main(String[] args) throws IOException
     {
-    	Dagger service = DaggerDaggerComponent.create().buildMongoHttp();
-
-    	PostHandler handler = DaggerPostHandlerComponent.create().buildHandler();
-
-        //Create your server context here
-        service.getServer().createContext("/api/v1/post", handler);
+        HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", PORT), 0);
         
-    	service.getServer().start();
-
-    	System.out.printf("Server started on port %d\n", port);
+        server.createContext("/api/v1/addActor", new AddActor());
+        server.createContext("/api/v1/addMovie", new AddMovie());
+        server.createContext("/api/v1/addRelationship", new AddRelationship());
+        server.createContext("/api/v1/getActor", new GetActor());
+        server.createContext("/api/v1/getMovie", new GetMovie());
+        server.createContext("/api/v1/hasRelationship", new HasRelationship());
+        server.createContext("/api/v1/computeBaconNumber", new ComputeBaconNumber());
+        server.createContext("/api/v1/computeBaconPath", new ComputeBaconPath());
+        
+        server.start();
+        System.out.printf("Server started on port %d...\n", PORT);
     }
-}
+}	
